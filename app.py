@@ -45,6 +45,7 @@ class TodoService:
                 self.tasks.pop(i)
                 return True
         return False
+ 
 class UserAuthService:
     """Service d'authentification des utilisateurs."""
     def __init__(self):
@@ -63,3 +64,10 @@ class UserAuthService:
         if user and user["password_hash"] == hash(password):
             return True
         return False
+
+class TaskNotificationService:
+    """Service de notifications pour les tâches."""
+    def notify(self, task: dict, event: str) -> str:
+        message = f"[{event.upper()}] Tâche #{task['id']}: {task['title']}"
+        print(message)
+        return message
