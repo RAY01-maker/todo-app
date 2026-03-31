@@ -45,3 +45,21 @@ class TodoService:
                 self.tasks.pop(i)
                 return True
         return False
+class UserAuthService:
+    """Service d'authentification des utilisateurs."""
+    def __init__(self):
+        self.users = {}
+    def register(self, username: str, password: str) -> dict:
+        if username in self.users:
+            raise ValueError(f"Utilisateur '{username}' déjà existant")
+        self.users[username] = {
+            "username": username,
+            "password_hash": hash(password),  # simplifié
+            "created_at": datetime.now().isoformat(),
+        }
+        return self.users[username]
+    def login(self, username: str, password: str) -> bool:
+        user = self.users.get(username)
+        if user and user["password_hash"] == hash(password):
+            return True
+        return False
