@@ -10,7 +10,8 @@ class TodoService:
             "id": self.next_id,
             "title": title,
             "description": description,
-            "status": "pending"
+            "status": "pending",
+            "priority": "medium"
         }
         self.tasks.append(task)
         self.next_id += 1
@@ -18,19 +19,6 @@ class TodoService:
 
     def get_all_tasks(self):
         return self.tasks
-
-    def get_task_by_id(self, task_id):
-        for task in self.tasks:
-            if task["id"] == task_id:
-                return task
-        return None
-
-    def update_task(self, task_id, data):
-        task = self.get_task_by_id(task_id)
-        if not task:
-            return None
-        task.update(data)
-        return task
 
     def delete_task(self, task_id):
         for i, task in enumerate(self.tasks):
