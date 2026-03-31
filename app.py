@@ -1,9 +1,27 @@
+class UserAuth:
+    def __init__(self):
+        self.users = []
+
+    def register(self, username, password):
+        if not username or not password:
+            raise ValueError("Username and password required")
+        user = {"username": username, "password": password}
+        self.users.append(user)
+        return user
+
+    def login(self, username, password):
+        for user in self.users:
+            if user["username"] == username and user["password"] == password:
+                return True
+        return False
+
+
 class TodoService:
     def __init__(self):
         self.tasks = []
         self.next_id = 1
 
-    def create_task(self, title, description=""):
+    def create_task(self, title, description="", owner=None):
         if not title:
             raise ValueError("Title is required")
         task = {
@@ -11,7 +29,8 @@ class TodoService:
             "title": title,
             "description": description,
             "status": "pending",
-            "priority": "medium"
+            "priority": "medium",
+            "owner": owner
         }
         self.tasks.append(task)
         self.next_id += 1
