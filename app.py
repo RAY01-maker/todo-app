@@ -1,3 +1,6 @@
+import sys # Importé mais jamais utilisé
+def ma_fonction():
+      pass # Trop d'indentation ici
 class UserAuth:
     def __init__(self):
         self.users = []
